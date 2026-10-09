@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>乐土志 · 音乐版图</title>
+  <link rel="stylesheet" href="map.css" />
+</head>
+<body>
+  <div class="phone map-phone">
+    <div class="status-bar light">
+      <span class="time">9:41</span>
+      <div class="status-icons">
+        <span class="signal light"></span>
+        <span class="wifi light"></span>
+        <span class="battery light"></span>
+      </div>
+    </div>
+
+    <header class="map-header">
+      <div class="map-title-row">
+        <h1>音乐版图</h1>
+        <span class="online">Online</span>
+      </div>
+      <div class="avatar" aria-label="用户头像"></div>
+    </header>
+
+    <div class="map-viewport" id="viewport">
+      <div class="map-stage" id="stage">
+        <div class="map-world">
+          <img class="map-img" id="mapImg" src="map.png" alt="音乐版图" draggable="false" />
+          <!-- 亮光区外薄雾：不规则清晰范围以朋克维尔暖光为中心 -->
+          <svg class="map-fog" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <filter id="fogSoft" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="1.2" />
+              </filter>
+              <mask id="fogHole" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+                <rect width="100" height="100" fill="white" />
+                <g filter="url(#fogSoft)">
+                  <ellipse cx="48.4" cy="28.9" rx="8.6" ry="11.2" fill="black" />
+                  <ellipse cx="51.4" cy="26.4" rx="6.4" ry="11.8" fill="black" />
+                  <ellipse cx="45.4" cy="31.6" rx="7.2" ry="8.4" fill="black" />
+                  <ellipse cx="50.2" cy="34.2" rx="5.2" ry="7.0" fill="black" />
+                  <ellipse cx="46.4" cy="23.8" rx="5.0" ry="6.4" fill="black" />
+                  <ellipse cx="53.6" cy="30.6" rx="4.2" ry="5.4" fill="black" />
+                  <ellipse cx="43.4" cy="27.4" rx="4.0" ry="6.8" fill="black" />
+                </g>
+              </mask>
+            </defs>
+            <g mask="url(#fogHole)">
+              <rect class="fog-fill" width="100" height="100" fill="#c5d6e8" opacity="0.55" />
+              <g class="fog-blobs fog-blobs-a" opacity="0.4">
+                <ellipse cx="18" cy="22" rx="22" ry="14" fill="#eef4fa" />
+                <ellipse cx="78" cy="38" rx="24" ry="15" fill="#b7c9dc" />
+                <ellipse cx="42" cy="78" rx="28" ry="16" fill="#e6eef6" />
+                <ellipse cx="88" cy="72" rx="18" ry="12" fill="#c2d3e4" />
+              </g>
+              <g class="fog-blobs fog-blobs-b" opacity="0.34">
+                <ellipse cx="32" cy="55" rx="23" ry="14" fill="#f3f7fb" />
+                <ellipse cx="70" cy="18" rx="20" ry="12" fill="#aebdcf" />
+                <ellipse cx="60" cy="88" rx="25" ry="13" fill="#dce7f2" />
+              </g>
+            </g>
+          </svg>
+          <!-- 朋克维尔左下角房子：暖光窗 + 进出小人 -->
+          <div class="punk-life" aria-hidden="true">
+            <span class="win w1"></span>
+            <span class="win w2"></span>
+            <span class="win w3"></span>
+            <span class="win w4"></span>
+            <span class="win w5"></span>
+            <span class="win w6"></span>
+            <span class="win w7"></span>
+            <span class="door-glow"></span>
+            <span class="person pa"></span>
+            <span class="person pb"></span>
+            <span class="person pc"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="poi-card" id="poiCard">
+      <button class="poi-close" id="poiClose" type="button" aria-label="关闭">×</button>
+      <div class="poi-top">
+        <div class="poi-text">
+          <h2>朋克维尔<br />反叛酒馆</h2>
+          <p>在这里，噪音即是秩序，自由即是信仰。</p>
+        </div>
+        <div class="poi-thumb"></div>
+      </div>
+      <button class="enter-btn" type="button">进入</button>
+    </aside>
+
+    <button class="deck-fab" id="deckFab" type="button" aria-label="我的卡片">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="4" y="6" width="12" height="14" rx="2" fill="currentColor" opacity="0.35"/>
+        <rect x="7" y="4" width="12" height="14" rx="2" fill="currentColor"/>
+      </svg>
+    </button>
+
+    <nav class="bottom-nav">
+      <a class="bn" href="index.html"><i class="i-home"></i><span>首页</span></a>
+      <a class="bn" href="#"><i class="i-video"></i><span>视频</span></a>
+      <a class="bn" href="#"><i class="i-radar"></i><span>雷达</span></a>
+      <a class="bn" href="#"><i class="i-star"></i><span>星光</span></a>
+      <a class="bn" href="#"><i class="i-me"></i><span>我的</span></a>
+    </nav>
+
+    <!-- 卡片合集面板 -->
+    <div class="deck-panel hidden" id="deckPanel">
+      <div class="deck-panel-inner">
+        <header class="deck-head">
+          <div class="deck-title-row">
+            <h2>我的卡片</h2>
+            <span class="deck-count" id="deckCount">0/0</span>
+          </div>
+          <button class="deck-close" id="deckClose" type="button" aria-label="关闭">×</button>
+        </header>
+        <div class="deck-cats" id="deckCats"></div>
+        <div class="deck-carousel" id="deckCarousel"></div>
+        <div class="deck-now">
+          <span class="deck-now-icon"></span>
+          <div class="deck-now-text" id="deckNowText">
+            <strong>—</strong>
+            <span>—</span>
+          </div>
+          <span class="deck-now-more">⋯</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 进入乐土志立刻弹出的解锁卡片 -->
+    <div class="unlock-overlay" id="unlockOverlay">
+      <div class="unlock-sheet" id="unlockSheet">
+        <div class="paper-card">
+          <div class="paper-inner">
+            <div class="album-frame">
+              <img src="album-cover.jpg" alt="After Hours" class="album-img" />
+            </div>
+            <div class="stamp">2026.10.09</div>
+            <div class="paper-body">
+              <h2 class="album-title">After Hours</h2>
+              <p class="album-artist">The Weeknd</p>
+              <p class="unlock-line">解锁反叛酒馆</p>
+              <div class="reco-block">
+                <div class="reco-label">相似情绪的推荐曲目</div>
+                <ul class="reco-list">
+                  <li><span class="reco-dot"></span>Blinding Lights · The Weeknd</li>
+                  <li><span class="reco-dot"></span>Save Your Tears · The Weeknd</li>
+                  <li><span class="reco-dot"></span>Starboy · The Weeknd</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="unlock-actions">
+          <button class="collect-btn" type="button" id="collectBtn">收集到卡片了</button>
+          <button class="share-btn" type="button" aria-label="分享">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+              <path fill="currentColor" d="M12 3v10h2V6.4l3.3 3.3 1.4-1.4L13 3h-1zm-7 6v12h14V14h-2v7H7V11h5V9H5z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="cards-data.js"></script>
+  <script src="map.js"></script>
+</body>
+</html>
